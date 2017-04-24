@@ -3,6 +3,7 @@ package com.duan;
 import com.duan.analysis.ManifestAnalysis;
 import com.duan.db.DBMalwareHelper;
 import com.duan.decompile.Decompiler;
+import com.duan.table_manager.PermissionManager;
 import com.duan.table_manager.SamplesManager;
 
 /**
@@ -15,9 +16,12 @@ public class Main {
 
 //        initSamplesTable();
 
-        new Decompiler(false, false).decompileApk(8);
+//        new Decompiler(false, false).decompileApk(8);
 
-//        new ManifestAnalysis(DBMalwareHelper.MALWARE_TYPE_TROJAN_VIRUS_SW).analysis();
+//        ManifestAnalysis analysis = new ManifestAnalysis();
+//        analysis.analysis(7,6);
+//        analysis.insertToDB(analysis.getHashSet().toArray(new PermissionManager.Permission[0]));
+
 
     }
 

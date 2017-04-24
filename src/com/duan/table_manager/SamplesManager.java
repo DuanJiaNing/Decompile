@@ -185,6 +185,7 @@ public class SamplesManager implements DBControl<SamplesManager.Samples> {
      * @param ids ids
      * @return 信息
      */
+    //TODO SQLException after end of result set 203
     public Samples[] getSampleInfo(int[] ids) {
         Samples samples[] = new Samples[ids.length];
         Connection conn = DBMalwareHelper.getConnection();
@@ -197,6 +198,7 @@ public class SamplesManager implements DBControl<SamplesManager.Samples> {
             statement = conn.createStatement();
             set = statement.executeQuery(sql);
             int cc = 0;
+
             while (set.next()) {
                 samples[cc].setId(set.getInt(Samples.ID));
                 samples[cc].setPackageName(set.getString(Samples.PACKAGE));

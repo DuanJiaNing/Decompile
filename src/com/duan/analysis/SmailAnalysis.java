@@ -20,6 +20,10 @@ public class SmailAnalysis extends Analysis implements DBControl<FunctionsManage
 
     private HashSet<FunctionsManager.Function> hashSet;
 
+    public HashSet<FunctionsManager.Function> getHashSet() {
+        return hashSet;
+    }
+
     public SmailAnalysis() {
         this.mFunctionsManager = new FunctionsManager();
         hashSet = new HashSet<>();

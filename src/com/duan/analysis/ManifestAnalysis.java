@@ -19,6 +19,10 @@ public class ManifestAnalysis extends Analysis implements DBControl<PermissionMa
 
     private HashSet<PermissionManager.Permission> hashSet;
 
+    public HashSet<PermissionManager.Permission> getHashSet() {
+        return hashSet;
+    }
+
     public ManifestAnalysis() {
         this.mPermissionManager = new PermissionManager();
         hashSet = new HashSet<>();
@@ -39,8 +43,10 @@ public class ManifestAnalysis extends Analysis implements DBControl<PermissionMa
         PermissionManager.Permission per = new PermissionManager.Permission();
         per.setType(bean.getType());
         per.setName(m.group(1));
+        //重复的会被过滤
         hashSet.add(per);
     }
+
 
     @Override
     public boolean insertToDB(PermissionManager.Permission... ts) {
