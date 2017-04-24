@@ -13,6 +13,7 @@ import java.util.regex.Matcher;
  * Created by DuanJiaNing on 2017/4/24.
  * *
  */
+//TODO 完善该类
 public class SmailAnalysis extends Analysis implements DBControl<FunctionsManager.Function>{
 
     private FunctionsManager mFunctionsManager;
