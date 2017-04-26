@@ -60,6 +60,24 @@ public class FunctionsManager implements DBControl<FunctionsManager.Function> {
         private int count;
         private String type;
 
+        /**
+         * 格式化方法签名
+         *
+         * @param fClass     所属类名
+         * @param fName      方法名
+         * @param fParameter 方法参数
+         * @param fReturn    字符串格式为：所属类名 返回值类型 方法名 (参数1类型 参数2类型 ...)
+         */
+        public static String getSignature(String fClass, String fName, String fParameter[], String fReturn) {
+            StringBuffer buffer = new StringBuffer();
+            buffer.append(fClass).append(" ").append(fReturn).append(" ").append(fName).append("(");
+            Arrays.stream(fParameter).forEach(str -> buffer.append(str).append(" "));
+            if (fParameter.length != 0)
+                buffer.append("\b");
+            buffer.append(")");
+            return buffer.toString();
+        }
+
         @Override
         public int hashCode() {
             return type.hashCode();

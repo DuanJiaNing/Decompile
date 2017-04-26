@@ -14,7 +14,6 @@ public class DBUtil {
             try {
                 rs.close();
             } catch (SQLException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -22,7 +21,6 @@ public class DBUtil {
             try {
                 statement.close();
             } catch (SQLException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
