@@ -16,13 +16,17 @@ public class Main {
 
 //        initSamplesTable();
 
-//        new Decompiler(false, false).decompileApk(8);
+//        new Decompiler(true, true).decompileApk(new int[]{8,7});
 
-//        ManifestAnalysis analysis = new ManifestAnalysis();
-//        analysis.analysis(7,6);
-//        analysis.insertToDB(analysis.getHashSet().toArray(new PermissionManager.Permission[0]));
+        analysisManifest(7,8);
+
+    }
 
 
+    private static void analysisManifest(int...ids) {
+        ManifestAnalysis analysis = new ManifestAnalysis();
+        analysis.analysis(ids);
+        analysis.insertToDB(analysis.getHashSet().toArray(new PermissionManager.Permission[0]));
     }
 
 
@@ -34,7 +38,7 @@ public class Main {
         manager.checkType(DBMalwareHelper.MALWARE_TYPE_SEX_SW, true);
         manager.checkType(DBMalwareHelper.MALWARE_TYPE_TROJAN_VIRUS_SW, true);
         manager.checkType(DBMalwareHelper.MALWARE_TYPE_OTHER_SW, true);
-        manager.checkType(DBMalwareHelper.MALWARE_TYPE_TEST_SW, false);
+        manager.checkType(DBMalwareHelper.MALWARE_TYPE_TEST_SW, true);
 
     }
 }

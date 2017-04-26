@@ -102,7 +102,7 @@ public class Decompiler {
             try {
                 while ((len = (reader.read(msg, 0, msg.length))) > 0) {
                     if (co++ < 3) {
-                        ComPrint.error(id + " " + pn + " 反编译出错: " + new String(msg, 0, len));
+//                        ComPrint.error(id + " " + pn + " 反编译出错: " + new String(msg, 0, len));
                     }
                 }
             } catch (IOException e) {

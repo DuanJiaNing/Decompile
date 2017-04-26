@@ -38,8 +38,9 @@ public class SamplesManager implements DBControl<SamplesManager.Samples> {
         }
         Samples[] samples = new Samples[len];
         for (int i = 0; i < len; i++) {
-            samples[i].setType(whichtype);
-            samples[i].setPackageName(pgs[i].getName());
+            Samples sam = new Samples();
+            sam.setType(whichtype);
+            sam.setPackageName(pgs[i].getName());
 
             // 取的时候若显示 \ 后的内容会被转义 ，直接用 OK
             //注意 \\ 和 \ 的转换
@@ -50,7 +51,9 @@ public class SamplesManager implements DBControl<SamplesManager.Samples> {
                 // 在后面追加 \\\\ 实际打印出来就是 \\ ，保存时是 \
                 path.append(s + "\\\\");
             // 保存时最后有个多余的 \ ，保存是 \\，去掉
-            samples[i].setPath(new String(path.toString().toCharArray(), 0, path.length() - 2));
+            sam.setPath(new String(path.toString().toCharArray(), 0, path.length() - 2));
+
+            samples[i] = sam;
 
         }
 
