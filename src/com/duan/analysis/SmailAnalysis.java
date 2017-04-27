@@ -1,31 +1,24 @@
 package com.duan.analysis;
 
-import com.duan.common.ComPrint;
 import com.duan.common.ComString;
 import com.duan.common.StringUtil;
-import com.duan.db.DBControl;
 import com.duan.table_manager.FunctionsManager;
 import com.duan.table_manager.SamplesManager;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Collection;
 import java.util.regex.Matcher;
 
 /**
  * Created by DuanJiaNing on 2017/4/24.
  * *
  */
-//TODO 完善该类
-public class SmailAnalysis extends Analysis implements DBControl<FunctionsManager.Function> {
+public class SmailAnalysis extends Analysis {
 
     private FunctionsManager mFunctionsManager;
 
     private ArrayList<FunctionsManager.Function> arrayList;
-
-    public ArrayList<FunctionsManager.Function> getArrayList() {
-        return arrayList;
-    }
 
     public SmailAnalysis() {
         this.mFunctionsManager = new FunctionsManager();
@@ -33,17 +26,17 @@ public class SmailAnalysis extends Analysis implements DBControl<FunctionsManage
     }
 
     @Override
-    File getFile(SamplesManager.Samples sample) {
+    protected File getFile(SamplesManager.Samples sample) {
         return new File(ComString.DECOMPILE_PATH + sample.getType() + "\\" + sample.getPackageName() + "\\com");
     }
 
     @Override
-    String getRegex(SamplesManager.Samples sample) {
+    protected String getRegex(SamplesManager.Samples sample) {
         return ComString.REGEX_FUNCTIONS;
     }
 
     @Override
-    void find(Matcher m, SamplesManager.Samples sample) {
+    protected void find(Matcher m, SamplesManager.Samples sample) {
         if (m.groupCount() != 4)
             return;
         String fClass = m.group(1);
@@ -110,8 +103,12 @@ public class SmailAnalysis extends Analysis implements DBControl<FunctionsManage
     }
 
     @Override
+    public Collection<?> getContainerSet() {
+        return arrayList;
+    }
+
     public boolean insertToDB(FunctionsManager.Function... fs) {
-        return mFunctionsManager.insertToDB(fs);
+        return mFunctionsManager.insert(fs);
     }
 
 }

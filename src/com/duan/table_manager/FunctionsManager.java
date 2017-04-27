@@ -16,7 +16,7 @@ import java.util.Arrays;
 public class FunctionsManager implements DBControl<FunctionsManager.Function> {
 
     @Override
-    public boolean insertToDB(Function... functions) {
+    public boolean insert(Function... functions) {
         final Connection conn = DBMalwareHelper.getConnection();
         final Statement[] statement = {null};
         Arrays.stream(functions).forEach(fun -> {
@@ -48,11 +48,11 @@ public class FunctionsManager implements DBControl<FunctionsManager.Function> {
 
     public static class Function {
 
-        final static String ID = "function_id";
-        final static String CLASS = "function_class";
-        final static String SIGNATURE = "function_signature";
-        final static String COUNT = "function_count";
-        final static String TYPE = "function_type";
+        final static String ID = "id";
+        final static String CLASS = "class";
+        final static String SIGNATURE = "signature";
+        final static String COUNT = "count";
+        final static String TYPE = "mtype";
 
         private String clasS;
         private String signature;

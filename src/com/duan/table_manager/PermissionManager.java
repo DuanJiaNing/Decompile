@@ -16,7 +16,7 @@ import java.util.Arrays;
 public class PermissionManager implements DBControl<PermissionManager.Permission> {
 
     @Override
-    public boolean insertToDB(Permission... permissions) {
+    public boolean insert(Permission... permissions) {
         final Connection conn = DBMalwareHelper.getConnection();
         final Statement[] statement = {null};
         Arrays.stream(permissions).forEach(permission -> {
@@ -47,9 +47,9 @@ public class PermissionManager implements DBControl<PermissionManager.Permission
 
 
     public static class Permission {
-        final static String ID = "permission_id";
-        final static String TYPE = "permission_type";
-        final static String NAME = "permission_name";
+        final static String ID = "id";
+        final static String TYPE = "mtype";
+        final static String NAME = "name";
 
         private int id;
         private String name;

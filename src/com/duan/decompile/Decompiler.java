@@ -40,9 +40,6 @@ public class Decompiler {
 
     }
 
-    public void decompileApkWithFillPath(String apkFillPath, boolean extract) {
-    }
-
     public void decompileApk(int[] apkIds) {
         for (int id : apkIds) {
             SamplesManager.Samples s = mSamplesManager.getSampleInfo(id);

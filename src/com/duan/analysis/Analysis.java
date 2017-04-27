@@ -2,9 +2,11 @@ package com.duan.analysis;
 
 import com.duan.common.ComPrint;
 import com.duan.table_manager.SamplesManager;
+import com.sun.istack.internal.NotNull;
 
 import java.io.*;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,7 +14,7 @@ import java.util.regex.Pattern;
  * Created by DuanJiaNing on 2017/4/24.
  * *
  */
-public abstract class Analysis {
+public abstract class Analysis implements Analysisor {
 
     private SamplesManager mSamplesManager;
 
@@ -26,7 +28,7 @@ public abstract class Analysis {
      * @param sample 当前解析的样本
      * @return 子类返回待解析文件
      */
-    abstract File getFile(SamplesManager.Samples sample);
+    protected abstract File getFile(SamplesManager.Samples sample);
 
     /**
      * 获得当前解析使用的正则表达式
@@ -34,28 +36,39 @@ public abstract class Analysis {
      * @param sample 当前解析的样本
      * @return 子类返回正则表达式
      */
-    abstract String getRegex(SamplesManager.Samples sample);
+    protected abstract String getRegex(SamplesManager.Samples sample);
 
     /**
      * 有符合的匹配被找到时调用此方法
-     *
-     * @param m      匹配者
+     *  @param m      匹配者
      * @param sample 当前解析的样本
      */
-    abstract void find(Matcher m, SamplesManager.Samples sample);
+    protected abstract void find(Matcher m, SamplesManager.Samples sample);
 
-    public void analysis(String whichType) {
-        SamplesManager.Samples samples[] = mSamplesManager.getSampleInfo(whichType);
-        Arrays.stream(samples).forEach(bean -> ergodicFile(getFile(bean), bean));
+    public abstract @NotNull Collection<?> getContainerSet();
+
+    @Override
+    public void analysisById(int id) {
+        getContainerSet().clear();
+        SamplesManager.Samples samples = mSamplesManager.getSampleInfo(id);
+        ergodicFile(getFile(samples),samples);
     }
 
-    public void analysis(int... ids) {
-//        SamplesManager.Samples samples[] = mSamplesManager.getSampleInfo(ids);
+    @Override
+    public void analysisByIds(int... ids) {
+        getContainerSet().clear();
         SamplesManager.Samples samples[] = new SamplesManager.Samples[ids.length];
         int i = 0;
         for (int id : ids)
             samples[i++] = mSamplesManager.getSampleInfo(id);
 
+        Arrays.stream(samples).forEach(bean -> ergodicFile(getFile(bean), bean));
+    }
+
+    @Override
+    public void analysisByType(String whichType) {
+        getContainerSet().clear();
+        SamplesManager.Samples samples[] = mSamplesManager.getSampleInfo(whichType);
         Arrays.stream(samples).forEach(bean -> ergodicFile(getFile(bean), bean));
     }
 

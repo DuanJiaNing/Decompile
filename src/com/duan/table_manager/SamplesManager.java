@@ -57,7 +57,7 @@ public class SamplesManager implements DBControl<SamplesManager.Samples> {
 
         }
 
-        boolean su = insertToDB(samples);
+        boolean su = insert(samples);
         ComPrint.normal(DBMalwareHelper.TABLE_SAMPLES + " 表  " + whichtype + " 类数据刷新" + (su ? "成功" : "失败"));
     }
 
@@ -82,7 +82,7 @@ public class SamplesManager implements DBControl<SamplesManager.Samples> {
     }
 
     @Override
-    public boolean insertToDB(Samples... samples) {
+    public boolean insert(Samples... samples) {
         final Connection conn = DBMalwareHelper.getConnection();
         Statement statement = null;
         for (int i = 0; i < samples.length; i++) {
@@ -222,10 +222,10 @@ public class SamplesManager implements DBControl<SamplesManager.Samples> {
 
 
     public static class Samples {
-        static final String ID = "sample_id";
-        static final String PACKAGE = "sample_package_name";
-        static final String TYPE = "sample_type";
-        static final String PATH = "sample_path";
+        static final String ID = "id";
+        static final String PACKAGE = "package_name";
+        static final String TYPE = "mtype";
+        static final String PATH = "path";
 
         private int id;
         private String packageName;
