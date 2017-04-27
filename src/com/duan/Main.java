@@ -6,6 +6,7 @@ import com.duan.common.ComPrint;
 import com.duan.common.ComString;
 import com.duan.db.DBMalwareHelper;
 import com.duan.decompile.Decompiler;
+import com.duan.table_manager.FunctionsManager;
 import com.duan.table_manager.PermissionManager;
 import com.duan.table_manager.SamplesManager;
 
@@ -26,7 +27,7 @@ public class Main {
 
 //        analysisManifest(7,8);
 
-        analysisSmail(8);
+//        analysisSmail(7,8);
 
 
     }
@@ -43,6 +44,8 @@ public class Main {
     private static void analysisSmail(int... ids) {
         SmailAnalysis analysis = new SmailAnalysis();
         analysis.analysis(ids);
+        analysis.insertToDB(analysis.getArrayList().toArray(new FunctionsManager.Function[0]));
+
     }
 
     //从 AndroidManifest 文件中提取权限

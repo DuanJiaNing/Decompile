@@ -39,7 +39,7 @@ public class FunctionsManager implements DBControl<FunctionsManager.Function> {
                 }
             }
             if (isNew)
-                ComPrint.info("新增 " + type + "\t" + signature);
+                ComPrint.info("新增 " + type + "\t类:" + clasS + "\t签名:" + signature + "\t次数:" + count);
 
         });
         DBUtil.closeSetStatConn(conn, null, statement[0]);
@@ -54,28 +54,26 @@ public class FunctionsManager implements DBControl<FunctionsManager.Function> {
         final static String COUNT = "function_count";
         final static String TYPE = "function_type";
 
-        private int id;
         private String clasS;
         private String signature;
-        private int count;
+        private int count = 1;
         private String type;
 
         /**
          * 格式化方法签名
          *
-         * @param fClass     所属类名
          * @param fName      方法名
          * @param fParameter 方法参数
          * @param fReturn    字符串格式为：所属类名 返回值类型 方法名 (参数1类型 参数2类型 ...)
          */
-        public static String getSignature(String fClass, String fName, String fParameter[], String fReturn) {
+        public void setSignature(String fName, String fParameter[], String fReturn) {
             StringBuffer buffer = new StringBuffer();
-            buffer.append(fClass).append(" ").append(fReturn).append(" ").append(fName).append("(");
+            buffer.append(fReturn).append(" ").append(fName).append("(");
             Arrays.stream(fParameter).forEach(str -> buffer.append(str).append(" "));
             if (fParameter.length != 0)
                 buffer.append("\b");
             buffer.append(")");
-            return buffer.toString();
+            this.signature = buffer.toString();
         }
 
         @Override
@@ -91,16 +89,18 @@ public class FunctionsManager implements DBControl<FunctionsManager.Function> {
             return fun.getType().equals(type) && fun.getSignature().equals(signature);
         }
 
-        public void setId(int id) {
-            this.id = id;
+        @Override
+        public String toString() {
+            return "Function{" +
+                    "clasS='" + clasS + '\'' +
+                    ", signature='" + signature + '\'' +
+                    ", count=" + count +
+                    ", type='" + type + '\'' +
+                    '}';
         }
 
         public void setClasS(String clasS) {
             this.clasS = clasS;
-        }
-
-        public void setSignature(String signature) {
-            this.signature = signature;
         }
 
         public void setCount(int count) {
@@ -109,10 +109,6 @@ public class FunctionsManager implements DBControl<FunctionsManager.Function> {
 
         public void setType(String type) {
             this.type = type;
-        }
-
-        public int getId() {
-            return id;
         }
 
         public String getClasS() {

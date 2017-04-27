@@ -2,15 +2,15 @@ package com.duan.analysis;
 
 import com.duan.common.ComPrint;
 import com.duan.common.ComString;
+import com.duan.common.StringUtil;
 import com.duan.db.DBControl;
 import com.duan.table_manager.FunctionsManager;
 import com.duan.table_manager.SamplesManager;
 
 import java.io.File;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.regex.Matcher;
-import java.util.stream.Stream;
 
 /**
  * Created by DuanJiaNing on 2017/4/24.
@@ -21,15 +21,15 @@ public class SmailAnalysis extends Analysis implements DBControl<FunctionsManage
 
     private FunctionsManager mFunctionsManager;
 
-    private HashSet<FunctionsManager.Function> hashSet;
+    private ArrayList<FunctionsManager.Function> arrayList;
 
-    public HashSet<FunctionsManager.Function> getHashSet() {
-        return hashSet;
+    public ArrayList<FunctionsManager.Function> getArrayList() {
+        return arrayList;
     }
 
     public SmailAnalysis() {
         this.mFunctionsManager = new FunctionsManager();
-        hashSet = new HashSet<>();
+        arrayList = new ArrayList<>();
     }
 
     @Override
@@ -51,10 +51,14 @@ public class SmailAnalysis extends Analysis implements DBControl<FunctionsManage
         String fPar = m.group(3);
         String fReaturn = m.group(4);
         String fpars[] = null, temp[];
+        StringUtil util = new StringUtil();
 
         //返回值类型
-        if (fReaturn.charAt(0) == 'L')
+        if (fReaturn.length() == 1)
+            fReaturn = util.getType(fReaturn);
+        else if (fReaturn.charAt(0) == 'L') {
             fReaturn = fReaturn.substring(1, fReaturn.length() - 1);
+        }
 
         //参数类型
         if (fPar.contains(";")) {
@@ -63,7 +67,11 @@ public class SmailAnalysis extends Analysis implements DBControl<FunctionsManage
             for (int i = 0; i < strs.length; i++) {
                 if (strs[i].charAt(0) == 'L')
                     strs[i] = strs[i].substring(1);
-                temp[i] = strs[i];
+                if (strs[i].length() == 1)
+                    temp[i] = util.getType(strs[i]);
+                else
+                    temp[i] = strs[i];
+
             }
             fpars = temp;
         } else if (!fPar.contains("/")) {
@@ -71,18 +79,8 @@ public class SmailAnalysis extends Analysis implements DBControl<FunctionsManage
             int j = 0;
             temp = new String[chars.length];
             for (int i = 0; i < chars.length; i++) {
-                if (
-                        chars[i] == 'V' ||
-                                chars[i] == 'Z' ||
-                                chars[i] == 'B' ||
-                                chars[i] == 'S' ||
-                                chars[i] == 'C' ||
-                                chars[i] == 'I' ||
-                                chars[i] == 'J' ||
-                                chars[i] == 'F' ||
-                                chars[i] == 'D'
-                        ) {
-                    temp[j++] = chars[i] + "";
+                if (StringUtil.isVZBS(chars[i])) {
+                    temp[j++] = util.getType(chars[i] + "");
                 }
             }
 
@@ -94,21 +92,26 @@ public class SmailAnalysis extends Analysis implements DBControl<FunctionsManage
             } else
                 fpars = temp;
         }
+
         String[] fPre = new String[fpars.length];
         for (int i = 0; i < fpars.length; i++) {
-            fPre[i] = fpars[i].replace("/",".");
+            fPre[i] = fpars[i].replace("/", ".");
         }
-        String value = FunctionsManager.Function.getSignature(
-                fClass.replace("/", "."),
-                fName.replace("/", "."),
-                fPre,
-                fReaturn.replace("/", "."));
-        ComPrint.error(value);
+        FunctionsManager.Function function = new FunctionsManager.Function();
+        function.setType(sample.getType());
+        function.setClasS(fClass.replace("/", "."));
+        function.setSignature(fName.replace("/", "."), fPre, fReaturn.replace("/", "."));
+
+        if (arrayList.contains(function)) {
+            FunctionsManager.Function fun = arrayList.get(arrayList.indexOf(function));
+            fun.setCount(fun.getCount() + 1);
+        } else
+            arrayList.add(function);
     }
 
     @Override
-    public boolean insertToDB(FunctionsManager.Function... ts) {
-        return true;
+    public boolean insertToDB(FunctionsManager.Function... fs) {
+        return mFunctionsManager.insertToDB(fs);
     }
 
 }
