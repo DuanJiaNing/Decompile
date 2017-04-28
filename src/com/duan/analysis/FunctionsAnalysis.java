@@ -14,13 +14,13 @@ import java.util.regex.Matcher;
  * Created by DuanJiaNing on 2017/4/24.
  * *
  */
-public class SmailAnalysis extends Analysis {
+public class FunctionsAnalysis extends Analysis {
 
     private FunctionsManager mFunctionsManager;
 
     private ArrayList<FunctionsManager.Function> arrayList;
 
-    public SmailAnalysis() {
+    public FunctionsAnalysis() {
         this.mFunctionsManager = new FunctionsManager();
         arrayList = new ArrayList<>();
     }

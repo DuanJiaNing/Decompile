@@ -1,8 +1,10 @@
 package com.duan.decompile;
 
+import com.duan.common.ApkTest;
 import com.duan.common.ComPrint;
 import com.duan.common.ComString;
 import com.duan.common.FileUtil;
+import com.duan.db.DBMalwareHelper;
 import com.duan.table_manager.SamplesManager;
 
 import java.io.*;
@@ -29,6 +31,11 @@ public class Decompiler {
         this.mExtract = mExtract;
         this.mDeleteTemp = mDeleteTemp;
         this.mSamplesManager = new SamplesManager();
+    }
+
+    @ApkTest("反编译待测 apk 文件")
+    public void decompileAPK() {
+        decompileALL(DBMalwareHelper.MALWARE_TYPE_TEST_SW);
     }
 
     public void decompileALL(String whichType) {

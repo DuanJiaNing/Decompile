@@ -1,6 +1,8 @@
 package com.duan.analysis;
 
+import com.duan.common.ApkTest;
 import com.duan.common.ComPrint;
+import com.duan.db.DBMalwareHelper;
 import com.duan.table_manager.SamplesManager;
 import com.sun.istack.internal.NotNull;
 
@@ -70,6 +72,12 @@ public abstract class Analysis implements Analysisor {
         getContainerSet().clear();
         SamplesManager.Samples samples[] = mSamplesManager.getSampleInfo(whichType);
         Arrays.stream(samples).forEach(bean -> ergodicFile(getFile(bean), bean));
+    }
+
+    @ApkTest("提取待测 apk 的权限信息")
+    public Analysis analysis() {
+        analysisByType(DBMalwareHelper.MALWARE_TYPE_TEST_SW);
+        return this;
     }
 
     // 递归遍历 ..\smail\com\ 目录或直接匹配（初始传入为文件时AndroidManifest.xml）

@@ -1,7 +1,7 @@
 package com.duan;
 
-import com.duan.analysis.ManifestAnalysis;
-import com.duan.analysis.SmailAnalysis;
+import com.duan.analysis.PermissionAnalysis;
+import com.duan.analysis.FunctionsAnalysis;
 import com.duan.db.DBControl;
 import com.duan.db.DBMalwareHelper;
 import com.duan.decompile.Decompiler;
@@ -44,7 +44,7 @@ public final class DatabasePrepare {
     // 3.提取每一个恶意软件反编译得到的 AndroidManifest 文件中申请的权限
     void analysisManifest() {
         HashSet<PermissionManager.Permission> permissions = new HashSet<>();
-        ManifestAnalysis analysis = new ManifestAnalysis();
+        PermissionAnalysis analysis = new PermissionAnalysis();
         analysis.analysisByType(DBMalwareHelper.MALWARE_TYPE_PHISHING_SW);
         permissions.addAll((Collection<? extends PermissionManager.Permission>) analysis.getContainerSet());
 
@@ -66,7 +66,7 @@ public final class DatabasePrepare {
 
     // 4.提取每一个恶意软件反编译得到的 smail 文件中调用到的 Android SDK 方法信息
     void analysisSmail() {
-        SmailAnalysis analysis = new SmailAnalysis();
+        FunctionsAnalysis analysis = new FunctionsAnalysis();
         analysis.analysisByType(DBMalwareHelper.MALWARE_TYPE_PHISHING_SW);
         analysis.analysisByType(DBMalwareHelper.MALWARE_TYPE_RANSOMWARE_SW);
         analysis.analysisByType(DBMalwareHelper.MALWARE_TYPE_SEX_SW);

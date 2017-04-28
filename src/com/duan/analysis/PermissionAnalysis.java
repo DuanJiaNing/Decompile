@@ -13,13 +13,13 @@ import java.util.regex.Matcher;
  * Created by DuanJiaNing on 2017/4/21.
  * *
  */
-public class ManifestAnalysis extends Analysis{
+public class PermissionAnalysis extends Analysis{
 
     private final PermissionManager mPermissionManager;
 
     private final HashSet<PermissionManager.Permission> hashSet;
 
-    public ManifestAnalysis() {
+    public PermissionAnalysis() {
         this.mPermissionManager = new PermissionManager();
         hashSet = new HashSet<>();
     }

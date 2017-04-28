@@ -1,5 +1,6 @@
 package com.duan.table_manager;
 
+import com.duan.common.ApkTest;
 import com.duan.common.ComPrint;
 import com.duan.db.DBControl;
 import com.duan.db.DBMalwareHelper;
@@ -17,6 +18,11 @@ import java.util.Arrays;
  * 管理 samples 表
  */
 public class SamplesManager implements DBControl<SamplesManager.Samples> {
+
+    @ApkTest("从磁盘中读入待测 apk 信息到数据库中")
+    public void checkTest() {
+        checkType(DBMalwareHelper.MALWARE_TYPE_TEST_SW,true);
+    }
 
     /**
      * 刷新数据库中 samples 表中指定软件类型
@@ -61,7 +67,6 @@ public class SamplesManager implements DBControl<SamplesManager.Samples> {
         ComPrint.normal(DBMalwareHelper.TABLE_SAMPLES + " 表  " + whichtype + " 类数据刷新" + (su ? "成功" : "失败"));
     }
 
-    //清空 samples 表中指定类型
     private static void cleanOut(String whichtype) {
         final Connection conn = DBMalwareHelper.getConnection();
         Statement statement = null;
@@ -219,7 +224,6 @@ public class SamplesManager implements DBControl<SamplesManager.Samples> {
             DBUtil.closeSetStatConn(conn, set, statement);
         }
     }
-
 
     public static class Samples {
         static final String ID = "id";
