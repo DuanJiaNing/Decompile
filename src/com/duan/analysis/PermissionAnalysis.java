@@ -1,5 +1,6 @@
 package com.duan.analysis;
 
+import com.duan.common.ComPrint;
 import com.duan.common.ComString;
 import com.duan.table_manager.PermissionManager;
 import com.duan.table_manager.SamplesManager;
@@ -13,7 +14,7 @@ import java.util.regex.Matcher;
  * Created by DuanJiaNing on 2017/4/21.
  * *
  */
-public class PermissionAnalysis extends Analysis{
+public class PermissionAnalysis extends Analysis {
 
     private final PermissionManager mPermissionManager;
 

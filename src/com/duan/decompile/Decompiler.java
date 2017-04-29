@@ -1,6 +1,6 @@
 package com.duan.decompile;
 
-import com.duan.common.ApkTest;
+import com.duan.common.ApkDetection;
 import com.duan.common.ComPrint;
 import com.duan.common.ComString;
 import com.duan.common.FileUtil;
@@ -17,8 +17,9 @@ import java.util.concurrent.Executors;
  */
 public class Decompiler {
 
-    private final int THREADSUM = 10;
-    private ExecutorService fixedThreadPool = Executors.newFixedThreadPool(THREADSUM);
+    // ----3！
+    private final int THREADSUM = 3;
+    private ExecutorService fixedThreadPool;
 
     private SamplesManager mSamplesManager;
 
@@ -31,9 +32,10 @@ public class Decompiler {
         this.mExtract = mExtract;
         this.mDeleteTemp = mDeleteTemp;
         this.mSamplesManager = new SamplesManager();
+        fixedThreadPool = Executors.newFixedThreadPool(THREADSUM);
     }
 
-    @ApkTest("反编译待测 apk 文件")
+    @ApkDetection("反编译待测 apk 文件")
     public void decompileAPK() {
         decompileALL(DBMalwareHelper.MALWARE_TYPE_TEST_SW);
     }
@@ -41,7 +43,6 @@ public class Decompiler {
     public void decompileALL(String whichType) {
         SamplesManager.Samples samples[] = mSamplesManager.getSampleInfo(whichType);
         for (SamplesManager.Samples s : samples) {
-            ComPrint.normal(s.getId() + " " + s.getPackageName() + " 开始反编译...");
             executeTasks(s);
         }
 
@@ -80,6 +81,7 @@ public class Decompiler {
             Runnable runnable = () -> {
                 try {
 
+                    ComPrint.normal(type + " " + pn + " 开始反编译");
                     Process process = Runtime.getRuntime().exec(cmd);
                     handlError(process.getErrorStream(), pn, id);
                     handlMessage(process.getInputStream());

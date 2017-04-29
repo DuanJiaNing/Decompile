@@ -23,7 +23,7 @@ public class FunctionsManager implements DBControl<FunctionsManager.Function> {
             boolean isNew = true;
             String clasS = fun.getClasS();
             String signature = fun.getSignature();
-            int count = fun.getCount();
+            float count = fun.getRatio();
             String type = fun.getType();
             String sql = "INSERT " + DBMalwareHelper.TABLE_FUNCTIONS + " VALUES (NULL,'" + clasS + "','" + signature + "'," + count + ",'" + type + "');";
             try {
@@ -39,7 +39,7 @@ public class FunctionsManager implements DBControl<FunctionsManager.Function> {
                 }
             }
             if (isNew)
-                ComPrint.info("新增 " + type + "\t类:" + clasS + "\t签名:" + signature + "\t次数:" + count);
+                ComPrint.info("新增 " + type + "\t类:" + clasS + "\t签名:" + signature + "\t比例:" + count);
 
         });
         DBUtil.closeSetStatConn(conn, null, statement[0]);
@@ -51,12 +51,13 @@ public class FunctionsManager implements DBControl<FunctionsManager.Function> {
         final static String ID = "id";
         final static String CLASS = "class";
         final static String SIGNATURE = "signature";
-        final static String COUNT = "count";
+        final static String RATIO = "ratio";
         final static String TYPE = "mtype";
 
         private String clasS;
         private String signature;
-        private int count = 1;
+        //创建对象了就一定有一次，插入到数据库前作为计数使用，插入数据库时转换为百分比
+        private float ratio = 1.0f;
         private String type;
 
         /**
@@ -86,7 +87,7 @@ public class FunctionsManager implements DBControl<FunctionsManager.Function> {
             if (!(obj instanceof Function))
                 return false;
             Function fun = (Function) obj;
-            return fun.getType().equals(type) && fun.getSignature().equals(signature);
+            return fun.getClasS().equals(clasS) && fun.getSignature().equals(signature) && fun.getType().equals(type);
         }
 
         @Override
@@ -94,7 +95,7 @@ public class FunctionsManager implements DBControl<FunctionsManager.Function> {
             return "Function{" +
                     "clasS='" + clasS + '\'' +
                     ", signature='" + signature + '\'' +
-                    ", count=" + count +
+                    ", count=" + ratio +
                     ", type='" + type + '\'' +
                     '}';
         }
@@ -103,8 +104,8 @@ public class FunctionsManager implements DBControl<FunctionsManager.Function> {
             this.clasS = clasS;
         }
 
-        public void setCount(int count) {
-            this.count = count;
+        public void setRatio(float count) {
+            this.ratio = count;
         }
 
         public void setType(String type) {
@@ -119,8 +120,8 @@ public class FunctionsManager implements DBControl<FunctionsManager.Function> {
             return signature;
         }
 
-        public int getCount() {
-            return count;
+        public float getRatio() {
+            return ratio;
         }
 
         public String getType() {

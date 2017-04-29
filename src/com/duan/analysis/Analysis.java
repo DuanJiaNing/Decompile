@@ -1,6 +1,6 @@
 package com.duan.analysis;
 
-import com.duan.common.ApkTest;
+import com.duan.common.ApkDetection;
 import com.duan.common.ComPrint;
 import com.duan.db.DBMalwareHelper;
 import com.duan.table_manager.SamplesManager;
@@ -74,7 +74,7 @@ public abstract class Analysis implements Analysisor {
         Arrays.stream(samples).forEach(bean -> ergodicFile(getFile(bean), bean));
     }
 
-    @ApkTest("提取待测 apk 的权限信息")
+    @ApkDetection("提取待测 apk 的权限信息")
     public Analysis analysis() {
         analysisByType(DBMalwareHelper.MALWARE_TYPE_TEST_SW);
         return this;

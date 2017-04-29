@@ -29,8 +29,7 @@ public interface DBControl<B> {
      * @param whichType 类型
      * @return 数量
      */
-    //TODO 待测试
-    static int countType(String whichType, String whichTable) {
+    static int countByType(String whichType, String whichTable) {
         Connection conn = DBMalwareHelper.getConnection();
         ResultSet set = null;
         Statement sta = null;

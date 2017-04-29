@@ -10,6 +10,6 @@ import java.lang.annotation.Target;
  */
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ApkTest {
+public @interface ApkDetection {
     String value() default " apk 恶意性检测";
 }

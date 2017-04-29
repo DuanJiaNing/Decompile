@@ -97,7 +97,7 @@ public class FunctionsAnalysis extends Analysis {
 
         if (arrayList.contains(function)) {
             FunctionsManager.Function fun = arrayList.get(arrayList.indexOf(function));
-            fun.setCount(fun.getCount() + 1);
+            fun.setRatio(fun.getRatio() + 1);
         } else
             arrayList.add(function);
     }

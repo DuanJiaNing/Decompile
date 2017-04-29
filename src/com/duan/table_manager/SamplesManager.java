@@ -1,6 +1,6 @@
 package com.duan.table_manager;
 
-import com.duan.common.ApkTest;
+import com.duan.common.ApkDetection;
 import com.duan.common.ComPrint;
 import com.duan.db.DBControl;
 import com.duan.db.DBMalwareHelper;
@@ -19,7 +19,7 @@ import java.util.Arrays;
  */
 public class SamplesManager implements DBControl<SamplesManager.Samples> {
 
-    @ApkTest("从磁盘中读入待测 apk 信息到数据库中")
+    @ApkDetection("从磁盘中读入待测 apk 信息到数据库中")
     public void checkTest() {
         checkType(DBMalwareHelper.MALWARE_TYPE_TEST_SW,true);
     }

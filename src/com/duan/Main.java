@@ -1,5 +1,9 @@
 package com.duan;
 
+import com.duan.common.ComPrint;
+import com.duan.db.DBControl;
+import com.duan.db.DBMalwareHelper;
+
 /**
  * Created by DuanJiaNing on 2017/4/19.
  * *
@@ -8,9 +12,12 @@ public class Main {
 
     public static void main(String[] args) {
 
+
     }
 
     /**
+     * ************已完成**************
+     *
      * 数据库预处理 ，该方法将依次完成以下任务
      * 1.将磁盘中的恶意软件样本集数据添加（刷新）到 tb_samples 表中
      * 2.将恶意软件样本集进行反编译，提取 AndroidManifest 文件和 smail 文件到指定文件夹下
@@ -22,17 +29,18 @@ public class Main {
         DatabasePrepare prepare = new DatabasePrepare();
 
         // 1.
-        prepare.initSamplesTable();
+//        prepare.initSamplesTable();
 
         // 2.
-        prepare.decompil();
+//        prepare.decompil();
 
         // 3.
-        prepare.analysisManifest();
+//        prepare.analysisManifest();
 
         // 4.
-        prepare.analysisSmail();
-
+//        prepare.analysisSmail();
 
     }
+
+
 }
