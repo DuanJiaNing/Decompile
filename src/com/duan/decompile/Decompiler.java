@@ -23,10 +23,14 @@ public class Decompiler {
 
     private SamplesManager mSamplesManager;
 
+    private OnDecompileFinish mOnDecompileFinish;
+
     //反编译结束是否提取 androidMinefist 和 Smail 文件
     private boolean mExtract = true;
     //提取文件结束是否删除编译结果文件
     private boolean mDeleteTemp = true;
+
+    private boolean isTest = false;
 
     public Decompiler(boolean mExtract, boolean mDeleteTemp) {
         this.mExtract = mExtract;
@@ -35,8 +39,14 @@ public class Decompiler {
         fixedThreadPool = Executors.newFixedThreadPool(THREADSUM);
     }
 
+    public void setOnDecompileFinish(OnDecompileFinish listener) {
+        if (listener != null)
+            this.mOnDecompileFinish = listener;
+    }
+
     @ApkDetection("反编译待测 apk 文件")
-    public void decompileAPK() {
+    public void decompileTestAPK() {
+        isTest = true;
         decompileALL(DBMalwareHelper.MALWARE_TYPE_TEST_SW);
     }
 
@@ -44,6 +54,8 @@ public class Decompiler {
         SamplesManager.Samples samples[] = mSamplesManager.getSampleInfo(whichType);
         for (SamplesManager.Samples s : samples) {
             executeTasks(s);
+            if (isTest)
+                break;
         }
 
     }
@@ -165,6 +177,8 @@ public class Decompiler {
                 deleteTemp(new File(tempPath));
                 ComPrint.info(apk + "临时文件已清除");
             }
+            if (mOnDecompileFinish != null)
+                mOnDecompileFinish.onFinish();
         }
     }
 
@@ -183,6 +197,10 @@ public class Decompiler {
         } else {
             ComPrint.error("所删除的文件不存在");
         }
+    }
+
+    public static interface OnDecompileFinish {
+        void onFinish();
     }
 
 }

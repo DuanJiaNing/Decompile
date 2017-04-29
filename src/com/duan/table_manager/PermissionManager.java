@@ -6,8 +6,10 @@ import com.duan.db.DBMalwareHelper;
 import com.duan.db.DBUtil;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -45,6 +47,30 @@ public class PermissionManager implements DBControl<PermissionManager.Permission
 
     }
 
+    public ArrayList getPermissions(String whichType) {
+        ArrayList<Permission> list = new ArrayList<>();
+        Connection conn = DBMalwareHelper.getConnection();
+        String sql = "SELECT * FROM " + DBMalwareHelper.TABLE_PERMISSION + " WHERE " + Permission.TYPE + " LIKE " + "'" + whichType + "'";
+        Statement statement = null;
+        ResultSet set = null;
+        try {
+            statement = conn.createStatement();
+            set = statement.executeQuery(sql);
+            while (set.next()) {
+                Permission per = new Permission();
+                per.setName(set.getString(Permission.NAME));
+                per.setType(null);
+                list.add(per);
+            }
+            return list;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            DBUtil.closeSetStatConn(conn, set, statement);
+        }
+    }
 
     public static class Permission {
         final static String ID = "id";

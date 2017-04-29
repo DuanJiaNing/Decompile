@@ -74,8 +74,8 @@ public abstract class Analysis implements Analysisor {
         Arrays.stream(samples).forEach(bean -> ergodicFile(getFile(bean), bean));
     }
 
-    @ApkDetection("提取待测 apk 的权限信息")
-    public Analysis analysis() {
+    @ApkDetection("提取待测 apk 的关键参考数据（权限和方法调用）")
+    public Analysis analysisTest() {
         analysisByType(DBMalwareHelper.MALWARE_TYPE_TEST_SW);
         return this;
     }

@@ -6,8 +6,10 @@ import com.duan.db.DBMalwareHelper;
 import com.duan.db.DBUtil;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -46,6 +48,33 @@ public class FunctionsManager implements DBControl<FunctionsManager.Function> {
         return true;
     }
 
+
+    public ArrayList getFunctions(String whichType) {
+        ArrayList<Function> list = new ArrayList<>();
+        Connection conn = DBMalwareHelper.getConnection();
+        String sql = "SELECT * FROM " + DBMalwareHelper.TABLE_FUNCTIONS + " WHERE " + Function.TYPE + " LIKE " + "'" + whichType + "'";
+        Statement statement = null;
+        ResultSet set = null;
+        try {
+            statement = conn.createStatement();
+            set = statement.executeQuery(sql);
+            while (set.next()) {
+                Function fun = new Function();
+                fun.setClasS(set.getString(Function.CLASS));
+                fun.setSignature(set.getString(Function.SIGNATURE));
+                fun.setRatio(set.getFloat(Function.RATIO));
+                list.add(fun);
+            }
+            return list;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            DBUtil.closeSetStatConn(conn, set, statement);
+        }
+    }
+
     public static class Function {
 
         final static String ID = "id";
@@ -75,6 +104,10 @@ public class FunctionsManager implements DBControl<FunctionsManager.Function> {
                 buffer.append("\b");
             buffer.append(")");
             this.signature = buffer.toString();
+        }
+
+        public void setSignature(String s) {
+            this.signature = s;
         }
 
         @Override
