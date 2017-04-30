@@ -1,5 +1,8 @@
 package com.duan;
 
+import com.duan.db.DBMalwareHelper;
+import com.duan.decompile.Decompiler;
+
 /**
  * Created by DuanJiaNing on 2017/4/19.
  * *
@@ -10,7 +13,7 @@ public class Main {
 
 //        init();
 
-        test();
+//        test();
 
     }
 
