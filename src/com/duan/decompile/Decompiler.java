@@ -93,7 +93,7 @@ public class Decompiler {
             Runnable runnable = () -> {
                 try {
 
-                    ComPrint.normal(type + " " + pn + " 开始反编译");
+                    ComPrint.normal(type + " " + pn + " 正在反编译...");
                     Process process = Runtime.getRuntime().exec(cmd);
                     handlError(process.getErrorStream(), pn, id);
                     handlMessage(process.getInputStream());
@@ -183,7 +183,7 @@ public class Decompiler {
     }
 
     //删除编译和提取过程产生的临时文件
-    private void deleteTemp(File tempF) {
+    public void deleteTemp(File tempF) {
         if (tempF.exists()) {
             if (tempF.isFile()) {
                 tempF.delete();

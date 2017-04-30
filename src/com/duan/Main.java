@@ -8,7 +8,10 @@ public class Main {
 
     public static void main(String[] args) {
 
+//        init();
+
         test();
+
     }
 
     /**
@@ -22,7 +25,7 @@ public class Main {
      */
     private static void init() {
 
-        DatabasePrepare prepare = new DatabasePrepare();
+//        DatabasePrepare prepare = new DatabasePrepare();
 
         // 1.
 //        prepare.initSamplesTable();

@@ -67,7 +67,7 @@ public class SamplesManager implements DBControl<SamplesManager.Samples> {
         ComPrint.normal(DBMalwareHelper.TABLE_SAMPLES + " 表  " + whichtype + " 类数据刷新" + (su ? "成功" : "失败"));
     }
 
-    private static void cleanOut(String whichtype) {
+    public static void cleanOut(String whichtype) {
         final Connection conn = DBMalwareHelper.getConnection();
         Statement statement = null;
 
