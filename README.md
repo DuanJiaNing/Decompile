@@ -1,11 +1,9 @@
 #### Decompile
 >Android 恶意软件检测系统
-
-使用 java 在 windows 环境下执行 apktool 工具的反编译命令，批量反编译 apk 文件。
+>使用 java 在 windows 环境下执行 apktool 工具的反编译命令，反编译 apk 文件，提取特征集，与恶意样本集比较计算相似度判断是否为恶意软件
 
 - 数据库：MySQL<br>
 - Apk Tool：ApkToolkit v3.0<br>
-<br>
 
 ##### 实现
 
@@ -19,4 +17,5 @@
 2. 与数据库中的恶意样本进行比较，计算出相似度<br>
 3. 根据相似度值判断是否为恶意软件及其所属恶意类型<br>
 
-##### 
+##### 存储结构和项目结构
+<img src=""/>
