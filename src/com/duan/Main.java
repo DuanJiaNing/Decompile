@@ -1,7 +1,5 @@
 package com.duan;
 
-import com.duan.decompile.Decompiler;
-
 /**
  * Created by DuanJiaNing on 2017/4/19.
  * *
@@ -13,8 +11,6 @@ public class Main {
 //        init();
 
 //        detection();
-
-        new Decompiler(false,false).decompileApk(22);
 
     }
 
@@ -29,19 +25,19 @@ public class Main {
      */
     private static void init() {
 
-//        DatabasePrepare prepare = new DatabasePrepare();
+        DatabasePrepare prepare = new DatabasePrepare();
 
         // 1.
-//        prepare.initSamplesTable();
+        prepare.initSamplesTable();
 
         // 2.
-//        prepare.decompil();
+        prepare.decompil();
 
         // 3.
-//        prepare.analysisManifest();
+        prepare.analysisManifest();
 
         // 4.
-//        prepare.analysisSmail();
+        prepare.analysisSmail();
 
     }
 

@@ -18,6 +18,19 @@
 2. 与数据库中的恶意样本进行比较，计算出相似度<br>
 3. 根据相似度值判断是否为恶意软件及其所属恶意类型<br>
 
+##### 使用
+1. 导入数据库文件：malware.sql ，数据库共有 172 个恶意软件的数据。<br>
+2. com.duan.Main.java 是程序的执行入口，init() 方法是进行数据库预处理用的，detection() 方法会开始进行恶意检测，在此之前需要将
+待测 apk 文件放到这个目录下(一次检测只能检测一个 apk 文件，所有词目录下只能放待测的 apk 文件，不能有其他无关文件)：`D:\Decompile\decompile\test_sw`
+
+Main.java
+```java
+public static void main(String[] args) {
+//     init();
+     detection();
+}
+```
+
 ##### 存储结构和项目结构
 <img height="500px" src="https://raw.githubusercontent.com/DuanJiaNing/Decompile/master/struct.png"/>
 
