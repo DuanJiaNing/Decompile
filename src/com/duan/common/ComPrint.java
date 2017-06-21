@@ -15,21 +15,20 @@ import static org.fusesource.jansi.Ansi.ansi;
  */
 public class ComPrint {
 
-    private static Calendar calendar = Calendar.getInstance();
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss\t");
 
     public static void normal(String info) {
-        System.out.println(dateFormat.format(calendar.getTime()) + info);
+        System.out.println(dateFormat.format(Calendar.getInstance().getTime()) + info);
     }
 
     public static void info(CharSequence logInfo) {
-        String str = dateFormat.format(calendar.getTime()) + logInfo;
+        String str = dateFormat.format(Calendar.getInstance().getTime()) + logInfo;
         System.out.println(ansi().eraseScreen().fg(Ansi.Color.BLUE).a(str).reset());
     }
 
     public static void error(String errorInfo) {
         PrintStream print = System.err;
-        print.println(dateFormat.format(calendar.getTime()) + errorInfo);
+        print.println(dateFormat.format(Calendar.getInstance().getTime()) + errorInfo);
     }
 
 }

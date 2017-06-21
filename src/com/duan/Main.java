@@ -1,6 +1,5 @@
 package com.duan;
 
-import com.duan.db.DBMalwareHelper;
 import com.duan.decompile.Decompiler;
 
 /**
@@ -13,7 +12,9 @@ public class Main {
 
 //        init();
 
-//        test();
+//        detection();
+
+        new Decompiler(false,false).decompileApk(22);
 
     }
 
@@ -51,7 +52,7 @@ public class Main {
      * 2. 待测 APP 的 apk 文件存放到 D:\Decompile\testApks\test_sw 目录下
      * 3. D:\Decompile\testApks\test_sw 目录下除了待测 APP 的 apk 文件外没有其他文件
      */
-    private static void test() {
+    private static void detection() {
         new MalwareDetection().startDetection();
     }
 
