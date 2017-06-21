@@ -41,7 +41,8 @@ public static void main(String[] args) {
 ```
 
 ##### 存储结构和项目结构
-存储根目录为 D:\Decompile\<br>
+存储根目录为 D:\Decompile\  
+
 <img height="500px" src="https://raw.githubusercontent.com/DuanJiaNing/Decompile/master/struct.png"/>
 
 ##### 程序运行结果
