@@ -32,6 +32,7 @@ tip：<br>
 4. 如果进行预处理，而恶意 apk 文件较多，那么预处理的时间也会比较长(我当初给 172 的文件做预处理花了差不多半个小时)<br>
 <br>
 Main.java<br>
+
 ```java
 public static void main(String[] args) {
 //     init();
