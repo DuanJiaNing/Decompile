@@ -24,12 +24,13 @@
 3. init() 方法用于数据库预处理，如果直接导入数据库就不需执行此方法，否则需要参照上面的目录结构，将恶意 apk 文件存放到`D:\Decompile\decompile`下对应目录中，之后注释 detection()
 方法，执行 init() 方法。<br>
 4. 注释 init() 方法，执行 detection() 方法会开始进行恶意检测，在此之前需要将待测 apk 文件放到这个目录下：`D:\Decompile\decompile\test_sw`，检测结束后结果会显示在 idea 的控制台中。<br>
-
+<br>
 tip：<br>
 1. apktool 的反编译时间由 apk 文件大小不同而有长有短。<br>
 2. 如果数据库密码不是`root`，那就需要修改 com.duan.db 包下的 DBMalwareHelper.java 中的 PASSWORD 变量(数据库名 DATABASE_MALWARE 变量)。<br>
 3. 一次检测只能检测一个 apk 文件，所以`D:\Decompile\decompile\test_sw`目录下只能放一个待测的 apk 文件，不能有其他无关文件<br>
 4. 如果进行预处理，而恶意 apk 文件较多，那么预处理的时间也会比较长(我当初给 172 的文件做预处理花了差不多半个小时)<br>
+<br>
 Main.java<br>
 ```java
 public static void main(String[] args) {
@@ -39,6 +40,7 @@ public static void main(String[] args) {
 ```
 
 ##### 存储结构和项目结构
+存储跟目录为 D:\Decompile\<br>
 <img height="500px" src="https://raw.githubusercontent.com/DuanJiaNing/Decompile/master/struct.png"/>
 
 ##### 程序运行结果
