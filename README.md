@@ -18,7 +18,7 @@
 3. 根据相似度值判断是否为恶意软件及其所属恶意类型<br>
 
 ##### 存储结构和项目结构
-<img height="300px" src="https://raw.githubusercontent.com/DuanJiaNing/Decompile/master/struct.png"/>
+<img height="500px" src="https://raw.githubusercontent.com/DuanJiaNing/Decompile/master/struct.png"/>
 
 ##### 程序运行结果
-<img height="300px" src="https://raw.githubusercontent.com/DuanJiaNing/Decompile/master/result.png"/>
+<img height="500px" src="https://raw.githubusercontent.com/DuanJiaNing/Decompile/master/result.png"/>
