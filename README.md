@@ -1,8 +1,7 @@
 #### Decompile
 >Android 恶意软件检测系统
 >使用 java 语言在 windows 环境下执行 apktool 工具的反编译命令，反编译 apk 文件，提取特征集，与恶意样本集比较计算出相似度，根据相似度判断是否为恶意软件
-
-
+<br>
 - 数据库：MySQL<br>
 - Apk Tool：ApkToolkit v3.0<br>
 
@@ -19,7 +18,7 @@
 3. 根据相似度值判断是否为恶意软件及其所属恶意类型<br>
 
 ##### 存储结构和项目结构
-<img src="https://raw.githubusercontent.com/DuanJiaNing/Decompile/master/struct.png"/>
+<img height="100px" src="https://raw.githubusercontent.com/DuanJiaNing/Decompile/master/struct.png"/>
 
 ##### 程序运行结果
-<img src="https://raw.githubusercontent.com/DuanJiaNing/Decompile/master/result.png"/>
+<img height="100px" src="https://raw.githubusercontent.com/DuanJiaNing/Decompile/master/result.png"/>
