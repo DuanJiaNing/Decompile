@@ -28,7 +28,7 @@
 tip：<br>
 1. apktool 的反编译时间由 apk 文件大小不同而有长有短。<br>
 2. 如果数据库密码不是`root`，那就需要修改 com.duan.db 包下的 DBMalwareHelper.java 中的 PASSWORD 变量(数据库名 DATABASE_MALWARE 变量)。<br>
-3. 一次检测只能检测一个 apk 文件，所以`D:\Decompile\decompile\test_sw`目录下只能放一个待测的 apk 文件，不能有其他无关文件<br>
+3. 一次检测只能检测一个 apk 文件，所以`D:\Decompile\testApks\test_sw`目录下只能放一个待测的 apk 文件，不能有其他无关文件<br>
 4. 如果进行预处理，而恶意 apk 文件较多，那么预处理的时间也会比较长(我当初给 172 的文件做预处理花了差不多半个小时)<br>
 <br>
 Main.java<br>
