@@ -23,7 +23,7 @@
 2. Main.java 文件的 main 方法是程序的执行入口。<br>
 3. init() 方法用于数据库预处理，如果直接导入数据库就不需执行此方法，否则需要参照上面的目录结构，将恶意 apk 文件存放到`D:\Decompile\decompile`下对应目录中，之后注释 detection()
 方法，执行 init() 方法。<br>
-4. 注释 init() 方法，执行 detection() 方法会开始进行恶意检测，在此之前需要将待测 apk 文件放到这个目录下：`D:\Decompile\decompile\test_sw`，检测结束后结果会显示在 idea 的控制台中。<br>
+4. 注释 init() 方法，执行 detection() 方法会开始进行恶意检测，在此之前需要将待测 apk 文件放到这个目录下：`D:\Decompile\testApks\test_sw`，检测结束后结果会显示在 idea 的控制台中。<br>
 <br>
 tip：<br>
 1. apktool 的反编译时间由 apk 文件大小不同而有长有短。<br>
